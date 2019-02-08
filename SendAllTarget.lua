@@ -4,7 +4,7 @@ require('strings')
 _addon.name = 'SendAllTarget'
 _addon.version = '1.0'
 _addon.author = 'Selindrile, Thanks and apologies to Arcon for abusing his code.'
-_addon.commands = {'sendalltarget','sendat','sat'}
+_addon.commands = {'sendalltarget','sendallt','sendat','sat'}
 
 windower.register_event('addon command',function (cmd,...)
 	if cmd == nil then return
