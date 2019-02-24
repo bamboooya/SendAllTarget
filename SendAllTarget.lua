@@ -2,12 +2,15 @@ local packets = require('packets')
 require('strings')
 
 _addon.name = 'SendAllTarget'
-_addon.version = '1.0'
+_addon.version = '1.1'
 _addon.author = 'Selindrile, Thanks and apologies to Arcon for abusing his code.'
 _addon.commands = {'sendalltarget','sendallt','sendat','sat'}
 
 windower.register_event('addon command',function (cmd,cmd2,...)
 	if cmd == nil then return
+	elseif cmd == 'stop' or cmd == 'unfollow' then
+		windower.ffxi.run(false)
+		windower.ffxi.follow()
 	elseif cmd == 'alltarget' then
 		local target = windower.ffxi.get_mob_by_target('t')
 		windower.send_command('send @all sendalltarget target ' .. tostring(target.id))
