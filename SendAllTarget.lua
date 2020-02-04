@@ -17,6 +17,24 @@ windower.register_event('addon command',function (cmd,cmd2,...)
 	elseif cmd == 'youtarget' then
 		local target = windower.ffxi.get_mob_by_target('t')
 		windower.send_command('send '..cmd2..' sendalltarget target ' .. tostring(target.id))
+	elseif cmd == 'allattack' then
+		local target = windower.ffxi.get_mob_by_target('t')
+		windower.send_command('send @all sendalltarget attack ' .. tostring(target.id))
+	elseif cmd == 'youattack' then
+		local target = windower.ffxi.get_mob_by_target('t')
+		windower.send_command('send '..cmd2..' sendalltarget attack ' .. tostring(target.id))
+	elseif cmd == 'attack' then
+		local id = tonumber(cmd2)
+		local target = windower.ffxi.get_mob_by_id(id)
+		if not target then
+			return
+		end
+		
+		packets.inject(packets.new('outgoing', 0x1a, {
+			['Target'] = target.id,
+			['Target Index'] = target.index,
+			['Category']     = 0x02,
+		}))
 	elseif cmd == 'target' then
 		local id = tonumber(cmd2)
 		local target = windower.ffxi.get_mob_by_id(id)
