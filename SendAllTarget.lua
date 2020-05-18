@@ -26,7 +26,7 @@ windower.register_event('addon command',function (cmd,cmd2,...)
 	elseif cmd == 'attack' then
 		local id = tonumber(cmd2)
 		local target = windower.ffxi.get_mob_by_id(id)
-		if target and target.valid_target and target.spawn_type == 16 and sqrt(target.distance) <= 30 then
+		if target and target.valid_target and target.spawn_type == 16 and math.sqrt(target.distance) <= 30 then
 			packets.inject(packets.new('outgoing', 0x1a, {
 				['Target'] = target.id,
 				['Target Index'] = target.index,
