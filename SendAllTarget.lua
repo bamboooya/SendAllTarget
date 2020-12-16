@@ -23,14 +23,28 @@ windower.register_event('addon command',function (cmd,cmd2,...)
 	elseif cmd == 'youattack' then
 		local target = windower.ffxi.get_mob_by_target('t')
 		windower.send_command('send '..cmd2..' sendalltarget attack ' .. tostring(target.id))
-	elseif cmd == 'attack' then
+	elseif cmd == 'allswitch' then
+		local target = windower.ffxi.get_mob_by_target('t')
+		windower.send_command('send @all sendalltarget swittch ' .. tostring(target.id))
+	elseif cmd == 'youswitch' then
+		local target = windower.ffxi.get_mob_by_target('t')
+		windower.send_command('send '..cmd2..' sendalltarget switch ' .. tostring(target.id))
+	elseif cmd == 'attack' or cmd == 'switch' then
 		local id = tonumber(cmd2)
 		local target = windower.ffxi.get_mob_by_id(id)
+		local category
+		if cmd == 'attack' then
+			category = 0x02
+		elseif cmd == 'switch' then
+			category = 0x0F
+		else
+			return
+		end
 		if target and target.valid_target and target.spawn_type == 16 and math.sqrt(target.distance) <= 30 then
 			packets.inject(packets.new('outgoing', 0x1a, {
 				['Target'] = target.id,
 				['Target Index'] = target.index,
-				['Category']     = 0x02,
+				['Category']     = category,
 			}))
 		end
 	elseif cmd == 'target' then
