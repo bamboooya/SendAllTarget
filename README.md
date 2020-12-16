@@ -13,4 +13,7 @@ Commands:
 * //sat youcommand charactername action - "charactername" performs "action" on sender's target.
 * //sat attack - This box attacks the ID provided.
 * //sat allattack - All boxes on this computer attack the sender's target.
-* //sat youattack charactername action - "charactername" attacks the sender's target.
+* //sat youattack charactername - "charactername" attacks the sender's target.
+* //sat switch - This box switches targets to attack the ID provided.
+* //sat allswitch - All boxes on this computer switch target to attack the sender's target.
+* //sat youswitch charactername - "charactername" switches target to attack the sender's target.
